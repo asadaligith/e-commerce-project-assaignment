@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import ProductCard from "@/components/ProductCard";
 import SearchBar from "@/components/SearchBar";
+import Navbar from "@/components/Navbar";
 
 import {
   getProducts,
@@ -68,7 +69,8 @@ export default function HomePage() {
     <main className="min-h-screen bg-gray-100">
       {/* Navbar */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-        <div
+      <Navbar/>
+        {/* <div
           className="
             max-w-7xl
             mx-auto
@@ -95,7 +97,7 @@ export default function HomePage() {
           >
             Sell
           </button>
-        </div>
+        </div> */}
       </header>
 
       {/* Hero */}
