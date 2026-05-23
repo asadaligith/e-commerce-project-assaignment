@@ -59,6 +59,9 @@ export default async function ProductDetails({
               <h2 className="mt-8 text-4xl font-bold text-green-600">
                 ${product.price}
               </h2>
+              <button className="mt-10 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>
