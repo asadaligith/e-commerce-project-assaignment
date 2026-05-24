@@ -13,7 +13,7 @@ app.use(express.json());
 
 let products = productData.products;
 
-app.get('/api', (req, res)=>{
+app.get('/', (req, res)=>{
     res.send("API Running.....")
 
 })
