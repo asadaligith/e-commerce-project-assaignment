@@ -18,7 +18,7 @@ app.get('/', (req, res)=>{
 
 })
 
-app.get('/api/product', (req,res)=>{
+app.get('/products', (req,res)=>{
     res.json({
            products
     })
