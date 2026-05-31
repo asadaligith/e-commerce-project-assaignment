@@ -49,7 +49,7 @@ export const getProductById = async (
 ): Promise<Product | null> => {
   try {
     const response = await fetch(
-      `https://dummyjson.com/products/${id}`,
+      `https://e-commerce-project-assaignment-back.vercel.app/products/${id}`,
       {
         cache: "no-store",
       }

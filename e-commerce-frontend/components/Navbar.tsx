@@ -1,12 +1,13 @@
 "use client";
 
 import {
-  signIn,
+  // signIn,
   signOut,
   useSession,
 } from "next-auth/react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -30,12 +31,14 @@ export default function Navbar() {
           </button>
           {/* Auth Section */}
           {!session ? (
+            <Link href="/login">
             <button
-              onClick={() => signIn("google")}
+              // onClick={() => signIn("google")}
               className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition"
             >
               Login 
             </button>
+            </Link>
           ) : (
             <div className="flex items-center gap-3">
               
