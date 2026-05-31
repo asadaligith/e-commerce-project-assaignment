@@ -8,8 +8,8 @@ export async function GET(request: Request) {
     const query = searchParams.get("q");
 
     const endpoint = query
-      ? `https://dummyjson.com/products/search?q=${query}`
-      : "https://dummyjson.com/products";
+      ? `https://e-commerce-project-assaignment-back.vercel.app/products/search?q=${query}`
+      : "https://e-commerce-project-assaignment-back.vercel.app/products";
 
     const response = await fetch(endpoint, {
       cache: "no-store",
