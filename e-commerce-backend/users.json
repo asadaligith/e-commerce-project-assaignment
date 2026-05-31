@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1780226658149,
+    "name": "asad",
+    "email": "asad2747982@gmail.com",
+    "password": "$2b$10$dz4.fIQgtMZTglHY/s4Trej1coXW0Dj7N63x2n9xI4LoThDfazWWq",
+    "image": "https://res.cloudinary.com/dxmsffosy/image/upload/v1780226659/olx-users/ric8sfchqbn3m06obpay.png"
+  },
+  {
+    "id": 1780227042184,
+    "name": "ali",
+    "email": "ali@gmail.com",
+    "password": "$2b$10$JaSf2GYCSzGKxRL2M9qIyuXQL3ZVr7HZcVwF7jWU64DSoOxsKPzZy",
+    "image": "https://res.cloudinary.com/dxmsffosy/image/upload/v1780227043/olx-users/tjipg0egibuyqphktoax.png"
+  }
+]
