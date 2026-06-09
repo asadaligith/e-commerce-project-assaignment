@@ -10,20 +10,43 @@ router.get("/", (req, res) => {
 });
 
 
-router.get("/:id", (req, res) => {
-  const id = Number(req.params.id);
+router.get("/search", async (req, res) => {
+  try {
+    const query = (req.query.q || "").trim();
 
-  const product = productData.products.find(
-    (item) => item.id === id
-  );
+    if (!query) {
+      return res.json({ products: [], total: 0, skip: 0, limit: 30 });
+    }
 
-  if (!product) {
-    return res.status(404).json({
-      message: "Product not found",
+    const regex = new RegExp(query, "i");
+    const products = await Product.find({
+      $or: [{ title: regex }, { description: regex }, { category: regex }],
+    }).sort({ createdAt: -1 });
+
+    res.json({
+      products: products.map((p) => p.toJSON()),
+      total: products.length,
+      skip: 0,
+      limit: products.length,
     });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
+});
 
-  res.json(product);
+
+router.get("/:id", async (req, res) => {
+  try {
+    const product = await Product.findOne({ productId: Number(req.params.id) });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.json(product.toJSON());
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 module.exports = router;
