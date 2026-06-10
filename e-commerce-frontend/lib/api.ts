@@ -55,11 +55,11 @@ export const getProductById = async (
       }
     );
 
-    if (!response.ok) {
-      return null;
-    }
+    const data = await response.json();
 
-    return response.json();
+    console.log("PRODUCT DATA:", data);
+
+    return data;
   } catch (error) {
     console.error("Product Fetch Error:", error);
 
