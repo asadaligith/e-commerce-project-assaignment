@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/multer");
+const {
+  createProduct,
+} = require("../controllers/productController");
 
 const productData = require("../product.json");
 
@@ -60,5 +64,13 @@ router.get("/:id", (req, res) => {
     });
   }
 });
+
+
+
+router.post(
+  "/create",
+  upload.single("image"),
+  createProduct
+);
 
 module.exports = router;
