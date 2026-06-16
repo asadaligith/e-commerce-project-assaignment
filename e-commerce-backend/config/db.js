@@ -14,6 +14,10 @@ const connectDB = async ()=>{
    }
    catch(error){
         console.error("Database connection failed:", error);
+        console.error("ERROR NAME:", error.name);
+         console.error("ERROR MESSAGE:", error.message);
+         console.error("ERROR CODE:", error.code);
+         console.error(error);
    }
 
 };

@@ -3,54 +3,54 @@ const express = require("express")
 
 const router = express.Router()
 
-const userSchema = mongoose.Schema({
-    userId: {
-        type: Number,
-        unique: true,
-        required: true
-    },
+const userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
-    
+      type: String,
+      required: true,
     },
+
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
-    hashedPassword: {
-        type: String,
-        required: true
+
+    password: {
+      type: String,
+      required: true,
     },
-    imageUrl:{
-        type:String,
-    }
 
-},
-    {
-        timestamps: true,
-    }
-)
+    image: {
+      type: String,
+      default: "",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const User = mongoose.model("user", userSchema)
+module.exports = mongoose.model("User", userSchema);
 
-router.get("/" , async (req , res) =>{
-    const users =  await User.find()
+
+
+// router.get("/" , async (req , res) =>{
+//     const users =  await User.find()
   
-    res.json(users).statusCode(200)
-  })
+//     res.json(users).statusCode(200)
+//   })
   
   
-  router.post("/" , async (req , res) =>{
-      const user = User.create({
-          userId: req.userId,
-          name: req.name,
-          email: req.email,
-          hashedPassword: req.hashedPassword,
-      })
+//   router.post("/" , async (req , res) =>{
+//       const user = User.create({
+//           userId: req.userId,
+//           name: req.name,
+//           email: req.email,
+//           hashedPassword: req.hashedPassword,
+//       })
   
-      res.status(201).json({message: '"user created successfully!" ' , ...user, hashedPassword: 'is secret'})
-  })
+//       res.status(201).json({message: '"user created successfully!" ' , ...user, hashedPassword: 'is secret'})
+//   })
   
-  module.exports = router
+//   module.exports = router

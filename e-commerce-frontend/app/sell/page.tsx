@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface FormState {
   title: string;
@@ -21,6 +22,7 @@ export default function SellPage() {
   });
 
   const [image, setImage] = useState<File | null>(null);
+  const router = useRouter();
 
   const submitHandler = async (
     e: React.FormEvent<HTMLFormElement>
@@ -83,6 +85,14 @@ export default function SellPage() {
         
         {/* Header */}
         <div className="text-center mb-8">
+
+        <button
+        onClick={() => router.push("/")}
+        className="flex items-center gap-2 mb-6 bg-white px-4 py-2 rounded-xl shadow hover:bg-slate-50 transition text-slate-700 font-medium"
+      >
+        ← Back
+      </button>
+
           <h1 className="text-4xl font-bold text-slate-900">
             Sell Your Product
           </h1>
@@ -126,7 +136,7 @@ export default function SellPage() {
                     title: e.target.value,
                   })
                 }
-                className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 required
               />
             </div>
@@ -147,7 +157,7 @@ export default function SellPage() {
                     description: e.target.value,
                   })
                 }
-                className="w-full border border-slate-300 rounded-xl px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-slate-300 rounded-xl px-4 py-3 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                 required
               />
             </div>
@@ -169,7 +179,7 @@ export default function SellPage() {
                       price: e.target.value,
                     })
                   }
-                  className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                   required
                 />
               </div>
@@ -189,7 +199,7 @@ export default function SellPage() {
                       phoneNumber: e.target.value,
                     })
                   }
-                  className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border border-slate-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
                   required
                 />
               </div>

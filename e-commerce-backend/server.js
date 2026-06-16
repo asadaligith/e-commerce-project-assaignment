@@ -15,9 +15,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const dns = require("dns");
+
+dns.setDefaultResultOrder("ipv4first");
+
+
+
 const startServer = async () => {
   try {
-     // await connectDB();
+     await connectDB();
 
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);

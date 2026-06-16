@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const fs = require("fs");
+const User = require("../models/authModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -10,20 +10,15 @@ const upload = require("../middleware/upload");
 
 //////////////// Signup //////////////////
 
-router.post(
-  "/signup",
+router.post("/signup",
   upload.single("image"),
   async (req, res) => {
     try {
       const { name, email, password } = req.body;
 
-      const users = JSON.parse(
-        fs.readFileSync("./users.json", "utf-8")
-      );
-
-      const existingUser = users.find(
-        (u) => u.email === email
-      );
+      const existingUser = await User.findOne({
+          email,
+        });
 
       if (existingUser) {
         return res.status(400).json({
@@ -57,12 +52,7 @@ router.post(
         image: imageUrl,
       };
 
-      users.push(newUser);
-
-      fs.writeFileSync(
-        "./users.json",
-        JSON.stringify(users, null, 2)
-      );
+      const user = await User.create(newUser);
 
       res.status(201).json({
         success: true,
@@ -82,13 +72,9 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const users = JSON.parse(
-      fs.readFileSync("./users.json", "utf-8")
-    );
-
-    const user = users.find(
-      (u) => u.email === email
-    );
+    const user = await User.findOne({
+        email,
+      });
 
     if (!user) {
       return res.status(404).json({
@@ -110,7 +96,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       {
-        id: user.id,
+        id: user._id,
         email: user.email,
       },
       process.env.JWT_SECRET,
@@ -123,7 +109,7 @@ router.post("/login", async (req, res) => {
       success: true,
       token,
       user: {
-        id: user.id,
+        id: user._id,
         name: user.name,
         email: user.email,
         image: user.image,
