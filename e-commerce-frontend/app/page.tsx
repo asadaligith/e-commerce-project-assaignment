@@ -69,35 +69,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-gray-100">
       {/* Navbar */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
-      <Navbar/>
-        {/* <div
-          className="
-            max-w-7xl
-            mx-auto
-            px-4
-            py-4
-            flex
-            items-center
-            justify-between
-          "
-        >
-          <h1 className="text-3xl font-bold text-green-600">
-            OLX Clone
-          </h1>
-
-          <button
-            className="
-              bg-green-600
-              text-white
-              px-5
-              py-2
-              rounded-lg
-              hover:bg-green-700
-            "
-          >
-            Sell
-          </button>
-        </div> */}
+      <Navbar/>    
       </header>
 
       {/* Hero */}

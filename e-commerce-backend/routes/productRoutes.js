@@ -5,33 +5,57 @@ const {
   createProduct,
 } = require("../controllers/productController");
 
-const productData = require("../product.json");
+const Product = require("../models/product");
 
 // All products
-router.get("/", (req, res) => {
-  res.json({
-    products: productData.products,
-  });
+router.get("/", async (req, res) => {
+  try {
+    const products = await Product.find().sort({
+      createdAt: -1,
+    });
+
+    res.json({
+      products,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 });
 
 // Search products
-router.get("/search", (req, res) => {
+router.get("/search", async (req, res) => {
   try {
-    const query = (req.query.q || "").trim().toLowerCase();
+    const query = (req.query.q || "").trim();
 
     if (!query) {
+      const products = await Product.find().sort({
+        createdAt: -1,
+      });
+
       return res.json({
-        products: [],
-        total: 0,
+        products,
+        total: products.length,
       });
     }
 
-    const products = productData.products.filter(
-      (product) =>
-        product.title.toLowerCase().includes(query) ||
-        product.description.toLowerCase().includes(query) ||
-        product.category.toLowerCase().includes(query)
-    );
+    const products = await Product.find({
+      $or: [
+        {
+          title: {
+            $regex: query,
+            $options: "i",
+          },
+        },
+        {
+          description: {
+            $regex: query,
+            $options: "i",
+          },
+        },
+      ],
+    });
 
     res.json({
       products,
@@ -45,10 +69,10 @@ router.get("/search", (req, res) => {
 });
 
 // Single product
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const product = productData.products.find(
-      (item) => item.id === Number(req.params.id)
+    const product = await Product.findById(
+      req.params.id
     );
 
     if (!product) {
@@ -64,7 +88,6 @@ router.get("/:id", (req, res) => {
     });
   }
 });
-
 
 
 router.post(
