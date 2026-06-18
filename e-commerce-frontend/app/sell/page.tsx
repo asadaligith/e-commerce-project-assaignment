@@ -12,13 +12,17 @@ interface FormState {
 }
 
 export default function SellPage() {
-  const token = localStorage.getItem("token");
-   useEffect(() => {
-    if (!token) {
-      router.push("/login"); // ✅ redirect
-    }
-  }, []);
+  const [token, setToken] = useState<string | null>(null);
+  
+  useEffect(() => {
+  const t = localStorage.getItem("token");
 
+  if (!t) {
+    router.push("/login");
+  } else {
+    setToken(t);
+  }
+}, []);
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState<FormState>({
