@@ -4,6 +4,7 @@ const upload = require("../middleware/multer");
 const {
   createProduct,
 } = require("../controllers/productController");
+const cloudinary = require("../config/cloudinary");
 
 const Product = require("../models/product");
 

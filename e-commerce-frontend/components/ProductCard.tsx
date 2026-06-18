@@ -7,11 +7,11 @@ interface Props {
   product: Product;
 }
 
-export default function ProductCard({
-  product,
-}: Props) {
+export default function ProductCard({product,}: Props) {
+
+
   return (
-    <Link href={`/products/${product.id}`}>
+    <Link href={`/products/${product._id}`}>
       <div
         className="
           bg-white
@@ -25,8 +25,9 @@ export default function ProductCard({
         "
       >
         <div className="relative h-56 w-full">
+          console.log(product);
           <Image
-            src={product.thumbnail}
+            src={product.imageUrl}
             alt={product.title}
             fill
             className="object-cover"
@@ -47,9 +48,10 @@ export default function ProductCard({
               ${product.price}
             </span>
 
-            <span className="text-sm bg-gray-100 px-3 py-1 rounded-full">
-              {product.category}
+            <span className="text-sm bg-gray-100 px-3 py-1 rounded-full text-blue-600">
+              {product.phoneNumber}
             </span>
+
           </div>
         </div>
       </div>
