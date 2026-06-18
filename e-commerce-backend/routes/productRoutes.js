@@ -5,8 +5,8 @@ const {
   createProduct,
 } = require("../controllers/productController");
 const cloudinary = require("../config/cloudinary");
-
 const Product = require("../models/product");
+const {authMiddleware} = require("../middleware/authMiddleware");
 
 // All products
 router.get("/", async (req, res) => {
@@ -92,7 +92,8 @@ router.get("/:id", async (req, res) => {
 
 
 router.post(
-  "/create",
+  "/sell",
+  authMiddleware,
   upload.single("image"),
   createProduct
 );

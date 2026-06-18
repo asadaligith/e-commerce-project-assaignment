@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -12,6 +12,14 @@ interface FormState {
 }
 
 export default function SellPage() {
+   useEffect(() => {
+      const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/login"); // ✅ redirect
+    }
+  }, []);
+
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState<FormState>({
@@ -34,6 +42,7 @@ export default function SellPage() {
       return;
     }
 
+ 
     const data = new FormData();
 
     data.append("title", formData.title);
@@ -45,15 +54,16 @@ export default function SellPage() {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        "http://localhost:4000/products/create",
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+        const response = await axios.post(
+      "http://localhost:4000/products/sell",
+      data,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,   // ✅ THIS IS REQUIRED
+        },
+      }
+    );
 
       console.log(response.data);
 

@@ -3,6 +3,7 @@ const cors = require("cors");
 const { config } = require("dotenv");
 
 const connectDB = require("./config/db");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -41,6 +42,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
+
 
 
 
