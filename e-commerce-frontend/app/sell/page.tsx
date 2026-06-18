@@ -12,9 +12,8 @@ interface FormState {
 }
 
 export default function SellPage() {
+  const token = localStorage.getItem("token");
    useEffect(() => {
-      const token = localStorage.getItem("token");
-
     if (!token) {
       router.push("/login"); // ✅ redirect
     }
