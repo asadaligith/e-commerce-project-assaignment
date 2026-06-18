@@ -40,7 +40,7 @@ export default async function ProductDetails({
           <div className="grid md:grid-cols-2 gap-10">
             <div className="relative h-[450px]">
               <Image
-                src={product.thumbnail}
+                src={product.imageUrl}
                 alt={product.title}
                 fill
                 className="object-cover rounded-2xl"
