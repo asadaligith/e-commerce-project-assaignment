@@ -1,7 +1,9 @@
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { getProductById } from "@/lib/api";
+import CheckoutButton from "./CheckoutButton";
 
 interface Props {
   params: Promise<{
@@ -62,6 +64,7 @@ export default async function ProductDetails({
               <button className="mt-10 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
                 Add to Cart
               </button>
+           <CheckoutButton productId={product._id} />
             </div>
           </div>
         </div>
